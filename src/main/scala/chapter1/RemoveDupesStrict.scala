@@ -2,37 +2,37 @@ package chapter1
 
 object RemoveDupesStrict {
 // Remove duplicates in a string without ANY additional collections
-  def dedupe(string: String): String = {
+  def dedupe(string: StringBuilder): String = {
     // null & length checks
     if (string == null) return ""
     if (string.length == 1) return string.toString
 
-    val chars = string.toCharArray
-    var right = chars.length - 1
+    var right = string.length - 1
     var compare = 0
 
     while(compare < right) {
-      val currentComparison = chars(compare)
+      val currentComparison = string(compare)
       var left = compare + 1
       while(left < right) {
-        if(currentComparison != chars(left)) left += 1
-        else { shift(left, chars)
+        if(currentComparison != string(left)) left += 1
+        else { shift(left, string)
           right -= 1
         }
       }
       compare += 1
     }
 
-    def shift(leftIndexToRemove: Int, charArray: Array[Char]): Unit = {
+    def shift(leftIndexToRemove: Int, charArray: StringBuilder): Unit = {
       var l = leftIndexToRemove
+      val length = charArray.length()
       while(l < charArray.length - 1){
         charArray(l) = charArray(l + 1)
         l += 1
       }
-      charArray.dropRight(1) // This doesn't work in world of mutability...
+      charArray.setLength(length - 1)
     }
 
-    chars.mkString("")
+    string.toString
 
   }
 
