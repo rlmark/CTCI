@@ -13,7 +13,7 @@ object RemoveDupesStrict {
     while(compare < right) {
       val currentComparison = string(compare)
       var left = compare + 1
-      while(left < right) {
+      while(left <= right) {
         if(currentComparison != string(left)) left += 1
         else { shift(left, string)
           right -= 1
