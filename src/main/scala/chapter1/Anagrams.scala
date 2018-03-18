@@ -15,8 +15,7 @@ object Anagrams {
       if(letters.get(char).isEmpty) {
         letters += (char -> 1)
       } else {
-        val tmp: Int = letters(char)
-        letters(char) = tmp + 1
+        letters(char) = letters(char) + 1
       }
     )
 
@@ -24,8 +23,7 @@ object Anagrams {
       if(letters.get(char2).isEmpty) {
         return false
       } else {
-        val tmp = letters(char2)
-        letters(char2) = tmp - 1
+        letters(char2) = letters(char2) - 1
       }
     )
 
