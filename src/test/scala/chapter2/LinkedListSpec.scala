@@ -20,9 +20,18 @@ class LinkedListSpec extends FlatSpec with Matchers {
     val result =  deleteNode(ll, 3 )
     result shouldBe Node(1, Node(2, Node(4, Empty)))
   }
+  it should "only delete the first instance of the desired node" in {
+    val ll = Node(1, Node(2, Node(3, Node(2, Empty))))
+    val result =  deleteNode(ll, 2 )
+    result shouldBe Node(1, Node(3, Node(2, Empty)))
+  }
   it should "handle deleting the end node" in {
     val ll = Node(1, Node(2, Node(3, Empty)))
     val result =  deleteNode(ll, 3 )
     result shouldBe Node(1, Node(2, Empty))
+  }
+  it should "handle when target to delete is not found" in {
+    val ll = Node(1, Node(2, Node(3, Empty)))
+    deleteNode(ll, 6) shouldBe ll
   }
 }
