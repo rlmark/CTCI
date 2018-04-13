@@ -14,4 +14,11 @@ object LinkedList {
     }
     loop(list)
   }
+
+  def map[A, B](list: LinkedList[A], f: A => B): LinkedList[B] = {
+    list match {
+      case Empty => Empty
+      case Node(a, next) => Node(f(a), map(next, f))
+    }
+  }
 }

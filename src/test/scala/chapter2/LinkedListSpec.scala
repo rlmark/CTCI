@@ -34,9 +34,12 @@ class LinkedListSpec extends FlatSpec with Matchers {
     val ll = Node(1, Node(2, Node(3, Empty)))
     deleteNode(ll, 6) shouldBe ll
   }
-  it should "handle mutation" in {
-    val mll = MList(1, MList(2, MList(3, null)))
-    deleteM(mll, 2)
-    mll shouldBe MList(1, MList(3, null))
+
+  "map" should "transform a linkedList" in {
+    val ll = Node(1, Node(2, Node(3, Empty)))
+    map(ll, (f: Int) => f + 1) shouldBe Node(2, Node(3, Node(4, Empty)))
+  }
+  it should "handle when the list is empty" in {
+    map(Empty, (f: Int) => f + 1) shouldBe Empty
   }
 }
