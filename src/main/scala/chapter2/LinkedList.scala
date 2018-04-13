@@ -21,4 +21,13 @@ object LinkedList {
       case Node(a, next) => Node(f(a), map(next, f))
     }
   }
+
+  // Note to self: stop forgetting that the OP of fold has TWO arguments, A and B.
+  // where A represents the current element in the list and B represents the accumulated value so far
+  def foldLeft[A,B](list: LinkedList[A], z: B)(op: (B,A) => B): B = {
+    list match {
+      case Empty => z
+      case Node(data, next) => op(foldLeft(next, z)(op), data)
+    }
+  }
 }

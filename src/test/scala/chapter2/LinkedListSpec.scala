@@ -42,4 +42,13 @@ class LinkedListSpec extends FlatSpec with Matchers {
   it should "handle when the list is empty" in {
     map(Empty, (f: Int) => f + 1) shouldBe Empty
   }
+
+  "foldLeft" should "fold over a linked list" in {
+    val ll = Node(1, Node(2, Node(3, Empty)))
+    val result = foldLeft(ll, 100)((acc: Int, next: Int) => next + acc )
+    result shouldBe 106
+  }
+  it should "handle when the linked list is empty" in {
+    foldLeft(Empty, 0)((acc: Int, next: Int) => acc * 199) shouldBe 0
+  }
 }
