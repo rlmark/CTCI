@@ -30,4 +30,11 @@ object LinkedList {
       case Node(data, next) => op(foldLeft(next, z)(op), data)
     }
   }
+
+  def foldRight[A, B](list: LinkedList[A], z: B)(op: (A, B) => B): B = {
+    list match {
+      case Empty => z
+      case Node(data, next) => op(data, foldRight(next, z)(op))
+    }
+  }
 }
