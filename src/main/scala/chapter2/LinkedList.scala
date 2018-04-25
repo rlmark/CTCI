@@ -1,6 +1,20 @@
 package chapter2
 
-sealed trait LinkedList[+A]
+sealed trait LinkedList[+A] {
+  def headOption = {
+    this match {
+      case Empty =>  None
+      case Node(data, _) => Some(data)
+    }
+  }
+
+  def head = {
+    this match {
+      case Empty => throw new RuntimeException("No element found")
+      case Node(data, _) => data
+    }
+  }
+}
 case object Empty extends LinkedList[Nothing]
 case class Node[A](data: A, next: LinkedList[A]) extends LinkedList[A]
 
@@ -36,5 +50,17 @@ object LinkedList {
       case Empty => z
       case Node(data, next) => op(data, foldRight(next, z)(op))
     }
+  }
+
+  // Write code to remove duplicates from an unsorted linked list.
+  def dedupe(list: LinkedList[Int]):LinkedList[Int] = {
+    def loop(itemToCheck: Int, list: LinkedList[Int]): LinkedList[Int] = {
+      list match {
+        case Empty => Empty
+        case Node(data, next) => loop(data, deleteNode(next, data))
+      }
+    }
+
+    loop(list.head, list)
   }
 }
