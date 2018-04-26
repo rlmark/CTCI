@@ -41,6 +41,17 @@ class LinkedListSpec extends FlatSpec with Matchers {
     result shouldBe Node(1, Node(3, Empty))
   }
 
+  it should "handle when all nodes should be deleted" in {
+    val ll = Node(2, Node(2, Empty))
+    val result = deleteAllMatches(ll, 2)
+    result shouldBe Empty
+  }
+
+  it should "handle when nothing matches the target" in {
+    val ll = Node(1, Node(2, Node(3, Node(2, Empty))))
+    val result = deleteAllMatches(ll, 7)
+    result shouldBe Node(1, Node(2, Node(3, Node(2, Empty))))
+  }
   "map" should "transform a linkedList" in {
     val ll = Node(1, Node(2, Node(3, Empty)))
     map(ll, (f: Int) => f + 1) shouldBe Node(2, Node(3, Node(4, Empty)))
