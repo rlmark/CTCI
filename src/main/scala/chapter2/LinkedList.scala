@@ -18,13 +18,24 @@ sealed trait LinkedList[+A] {
 case object Empty extends LinkedList[Nothing]
 case class Node[A](data: A, next: LinkedList[A]) extends LinkedList[A]
 
-object LinkedList {
+object LinkedList  extends App {
 
   def deleteNode(list: LinkedList[Int], d: Int): LinkedList[Int] = {
     def loop(l: LinkedList[Int]): LinkedList[Int] = l match {
       case Node(x, ys) if x == d => ys
       case Empty => Empty
       case Node(x, ys) => Node(x, loop(ys))
+    }
+    loop(list)
+  }
+
+  def deleteAllMatches(list: LinkedList[Int], target: Int): LinkedList[Int] = {
+    def loop(list: LinkedList[Int]): LinkedList[Int] = {
+      list match {
+        case Empty => Empty
+        case Node(data, next) if data == target => loop(next)
+        case Node(data, next) => Node(data, loop(next))
+      }
     }
     loop(list)
   }
@@ -54,13 +65,18 @@ object LinkedList {
 
   // Write code to remove duplicates from an unsorted linked list.
   def dedupe(list: LinkedList[Int]):LinkedList[Int] = {
-    def loop(itemToCheck: Int, list: LinkedList[Int]): LinkedList[Int] = {
+
+    def loop(list: LinkedList[Int]): LinkedList[Int] = {
       list match {
         case Empty => Empty
-        case Node(data, next) => loop(data, deleteNode(next, data))
+        case Node(data, next) => Node(data, loop(deleteNode(next, data)))
       }
     }
 
-    loop(list.head, list)
+    loop(list)
   }
+
+  val ll = Node(1, Node(2, Node(3, Node(1, Empty))))
+
+  println(dedupe(ll))
 }
