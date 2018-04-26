@@ -68,4 +68,20 @@ class LinkedListSpec extends FlatSpec with Matchers {
   it should "handle when the linked list is empty" in {
     foldLeft(Empty, 0)((acc: Int, next: Int) => acc * 199) shouldBe 0
   }
+
+  "dedupe" should "remove all duplicates from a list" in {
+    val ll = Node(1, Node(2, Node(3, Node(2, Empty))))
+    val result = dedupe(ll)
+    result shouldBe Node(1, Node(2, Node(3, Empty)))
+  }
+  it should "remove multiple duplicates from the list" in {
+    val ll = Node(1, Node(3, Node(2, Node(2, Node(3, Node(2, Empty))))))
+    val result = dedupe(ll)
+    result shouldBe Node(1, Node(3, Node(2, Empty)))
+  }
+  it should "handle when there is nothing to dedupe" in {
+    val ll = Node(1, Node(2, Node(3, Empty)))
+    val result = dedupe(ll)
+    result shouldBe Node(1, Node(2, Node(3, Empty)))
+  }
 }
