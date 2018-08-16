@@ -65,17 +65,17 @@ object LinkedList  extends App {
 
   // Write code to remove duplicates from an unsorted linked list.
   def dedupe(list: LinkedList[Int]):LinkedList[Int] = {
-    def loop(list: LinkedList[Int]): LinkedList[Int] = {
-      list match {
+    def loop(l: LinkedList[Int]): LinkedList[Int] = {
+      l match {
         case Empty => Empty
         case Node(data, next) => Node(data, loop(deleteAllMatches(next, data)))
       }
     }
-
     loop(list)
   }
 
-  val ll = Node(1, Node(2, Node(3, Node(1, Empty))))
-
-  println(dedupe(ll))
+  // Remove nth to last element
+  def remove[A](n: Int, list: LinkedList[A]): LinkedList[A] = {
+    ???
+  }
 }
