@@ -29,9 +29,9 @@ class KthLeastSpec extends WordSpec with Matchers {
               Empty()),
             Empty())
 
-//        withClue("k is 1, data should be 1")(findKthLeast(1, testTree) shouldBe 1)
+        withClue("k is 1, data should be 1")(findKthLeast(1, testTree) shouldBe 1)
         withClue("k is 2, data should be 2")(findKthLeast(2, testTree) shouldBe 2)
-//        withClue("k is 3, data should be 3")(findKthLeast(3, testTree) shouldBe 3)
+        withClue("k is 3, data should be 3")(findKthLeast(3, testTree) shouldBe 3)
       }
     }
   }
