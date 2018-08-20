@@ -34,5 +34,18 @@ class KthLeastSpec extends WordSpec with Matchers {
         withClue("k is 3, data should be 3")(findKthLeast(3, testTree) shouldBe 3)
       }
     }
+    "throw exception" when {
+      "given a K value greater than the nodes in the tree" in {
+        val testTree =
+          Node(1,3,
+            Empty(),
+            Node(2,2,
+              Empty(),
+              Node(3,1,
+                Empty(),
+                Empty())))
+        intercept[IllegalArgumentException] {findKthLeast(25, testTree)}
+      }
+    }
   }
 }
