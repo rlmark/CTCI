@@ -44,7 +44,7 @@ class KthLeastSpec extends WordSpec with Matchers {
               Node(3,1,
                 Empty(),
                 Empty())))
-        intercept[IllegalArgumentException] {findKthLeast(25, testTree)}
+        intercept[IllegalStateException] {findKthLeast(25, testTree)}
       }
     }
   }
