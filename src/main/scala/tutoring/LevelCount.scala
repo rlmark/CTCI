@@ -6,15 +6,15 @@ level K. the root is at Level 0, and for any node, the node's level is one more 
   */
   def levelCount[A](tree:Tree[A],k: Int): Int = {
 
-    def loop(tree:Tree[A],k: Int, acc: Int): Int = {
+    def loop(tree:Tree[A],k: Int): Int = {
       tree match {
-        case _: Empty => acc
+        case _: Empty => 0
         case Node(_, _, l, r) =>
-          if (k == 0) 1 + acc;
-          else loop(l, k - 1, acc) + loop(r, k - 1, acc)
+          if (k == 0) 1 ;
+          else loop(l, k - 1) + loop(r, k - 1)
       }
     }
 
-    loop(tree, k, 0)
+    loop(tree, k)
   }
 }
